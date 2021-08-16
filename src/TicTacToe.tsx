@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "./types";
+import { useAppDispatch, useAppSelector } from "./auxiliar/types";
 
 export default function TicTacToe() {
     const state = useAppSelector((state) => state.ticTacToe);

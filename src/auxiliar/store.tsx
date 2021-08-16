@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { ActionPlay, ActionReset, ITicTacToeState } from "../types";
+import { ActionPlay, ActionReset, ITicTacToeState } from "./types";
 
 
 

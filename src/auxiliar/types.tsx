@@ -1,6 +1,6 @@
 import { Action, PayloadAction } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { store } from "./auxiliar/store";
+import { store } from "./store";
 
 export type CellValue = "X" | "O" | "";
 
