@@ -4,8 +4,11 @@ import { store } from "./store";
 
 export type CellValue = "X" | "O" | "";
 
+export type Winner = "X" |"O" | "?" | "=";
+
 export interface ITicTacToeState {
     nextPlayer: "X" | "O",
+    winner: Winner,
     board: CellValue[][],
 }
 

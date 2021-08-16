@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "./auxiliar/types";
 export default function TicTacToe() {
     const state = useAppSelector((state) => state.ticTacToe);
     const dispatch = useAppDispatch();
+    console.log(state.winner);
 
     return (
         <div className="ticTacToe">
@@ -23,7 +24,7 @@ export default function TicTacToe() {
                     ))}
                 </tbody>
             </table>
-            <button onClick={()=> dispatch({type: "reset"})}>Reiniciar partida</button>
+            <button onClick={() => dispatch({ type: "reset" })}>Reiniciar partida</button>
         </div>
     );
 }
