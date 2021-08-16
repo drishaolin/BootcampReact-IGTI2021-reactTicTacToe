@@ -1,7 +1,12 @@
+import { Provider } from "react-redux";
 import TicTacToe from "./TicTacToe";
+import {store} from "./auxiliar/store";
+
 function App() {
   return (
-    <TicTacToe/>
+    <Provider store={store}>
+      <TicTacToe/>
+    </Provider>
   );
 }
 

@@ -1,5 +1,6 @@
+import { Action, PayloadAction } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { store } from "./TicTacToe";
+import { store } from "./auxiliar/store";
 
 export type CellValue = "X" | "O" | "";
 
@@ -7,6 +8,9 @@ export interface ITicTacToeState {
     nextPlayer: "X" | "O",
     board: CellValue[][],
 }
+
+export type ActionPlay = PayloadAction<{i: number, j: number}, "play">;
+export type ActionReset = Action<"reset">;
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
