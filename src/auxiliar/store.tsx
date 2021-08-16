@@ -36,7 +36,7 @@ function ticTacToeReducer(state = initialState, action: ActionPlay | ActionReset
     switch (action.type) {
         case "play":
             const { i, j } = action.payload;
-            if (state.board[i][j] === "") {
+            if (state.board[i][j] === "" && state.winner === "?") {
                 //teste de jogada válida em espaço vazio do board
                 const board = state.board.map((row) => row.map((cell) => cell));
                 board[i][j] = state.nextPlayer;

@@ -7,7 +7,11 @@ export default function TicTacToe() {
 
     return (
         <div className="ticTacToe">
-            <div>Aguardando a jogada de {state.nextPlayer}</div>
+            {state.winner === "?" && <div>Aguardando a jogada de {state.nextPlayer}</div>}
+            {state.winner !== "?" && (
+                <>{state.winner === "=" ? <h1>Empate</h1> : <h1>Vencedor {state.winner} </h1>}</>
+            )}
+
             <table>
                 <tbody>
                     {state.board.map((row, i) => (
