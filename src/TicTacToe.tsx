@@ -1,10 +1,7 @@
 import { Action, configureStore, PayloadAction } from "@reduxjs/toolkit";
+import { ITicTacToeState } from "./types";
 
-type CellValue = "X" | "O" | "";
-interface ITicTacToeState {
-    nextPlayer: "X" | "O",
-    board: CellValue[][],
-}
+
 
 const initialState: ITicTacToeState = {
     nextPlayer: "X",
@@ -31,13 +28,14 @@ function ticTacToeReducer (state = initialState, action: ActionPlay | ActionRese
     return state;
 }
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
         ticTacToe: ticTacToeReducer,
     },
 });
 
 console.log(store.getState());
+
 
 export default function TicTacToe() {
     const state: ITicTacToeState = {
