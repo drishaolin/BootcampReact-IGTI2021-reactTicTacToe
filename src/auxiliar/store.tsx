@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { ActionPlay, ActionReset, CellValue, ITicTacToeState, Winner } from "./types";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { ActionPlay, CellValue, ITicTacToeState, Winner } from "./types";
 
 const initialState: ITicTacToeState = {
     nextPlayer: "X",
@@ -10,6 +10,29 @@ const initialState: ITicTacToeState = {
         ["", "", ""],
     ],
 };
+
+const slice = createSlice({
+    name: "ticTacToe",
+    initialState,
+    //objeto reducers: cada chave representa um tipo de ação:
+    reducers: {
+        //o state abaixo representa uma cópia, e pode ser alterado diretamente:
+        play: (state, action: ActionPlay) => {
+            const { i, j } = action.payload;
+            //teste de jogada válida em espaço vazio do board:
+            if (state.board[i][j] === "" && state.winner === "?") {
+                state.board[i][j] = state.nextPlayer;
+                state.winner = getWinner(state.board);
+                state.nextPlayer = state.nextPlayer === "X" ? "O" : "X";
+            } else {
+                return state; //retorno do próprio estado inalterado
+            }
+        },
+        reset: (state) => {
+            return initialState;
+        },
+    },
+});
 
 function getWinner(board: CellValue[][]): Winner {
     const players: ("X" | "O")[] = ["X", "O"];
@@ -31,33 +54,35 @@ function getWinner(board: CellValue[][]): Winner {
     return "=";
 }
 
-
-function ticTacToeReducer(state = initialState, action: ActionPlay | ActionReset): ITicTacToeState {
-    switch (action.type) {
-        case "play":
-            const { i, j } = action.payload;
-            if (state.board[i][j] === "" && state.winner === "?") {
-                //teste de jogada válida em espaço vazio do board
-                const board = state.board.map((row) => row.map((cell) => cell));
-                board[i][j] = state.nextPlayer;
-                const winner = getWinner(board);
-                return {
-                    nextPlayer: state.nextPlayer === "X" ? "O" : "X",
-                    winner,
-                    board,
-                };
-            } else {
-                return state; //retorno do próprio estado inalterado
-            }
-        case "reset":
-            return initialState;
-    }
-    return state;
-}
-
+// function ticTacToeReducer(state = initialState, action: ActionPlay | ActionReset): ITicTacToeState {
+//     switch (action.type) {
+//         case "play":
+//             const { i, j } = action.payload;
+//             //teste de jogada válida em espaço vazio do board:
+//             if (state.board[i][j] === "" && state.winner === "?") {
+//                 //cópia do estado pois não deve ser diretamente alterado:
+//                 const board = state.board.map((row) => row.map((cell) => cell));
+//                 board[i][j] = state.nextPlayer;
+//                 const winner = getWinner(board);
+//                 return {
+//                     nextPlayer: state.nextPlayer === "X" ? "O" : "X",
+//                     winner,
+//                     board,
+//                 };
+//             } else {
+//                 return state; //retorno do próprio estado inalterado
+//             }
+//         case "reset":
+//             return initialState;
+//     }
+//     return state;
+// }
 
 export const store = configureStore({
     reducer: {
-        ticTacToe: ticTacToeReducer,
+        //ticTacToe: ticTacToeReducer,
+        ticTacToe: slice.reducer,
     },
 });
+
+export const { play, reset } = slice.actions;

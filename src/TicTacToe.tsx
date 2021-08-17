@@ -1,3 +1,4 @@
+import { play, reset } from "./auxiliar/store";
 import { useAppDispatch, useAppSelector } from "./auxiliar/types";
 
 export default function TicTacToe() {
@@ -19,7 +20,8 @@ export default function TicTacToe() {
                             {row.map((cell, j) => (
                                 <td
                                     key={j}
-                                    onClick={() => dispatch({ type: "play", payload: { i, j } })}
+                                    //onClick={() => dispatch({ type: "play", payload: { i, j } })}
+                                    onClick={() => dispatch(play({ i, j }))}
                                 >
                                     {cell}
                                 </td>
@@ -28,7 +30,12 @@ export default function TicTacToe() {
                     ))}
                 </tbody>
             </table>
-            <button onClick={() => dispatch({ type: "reset" })}>Reiniciar partida</button>
+            <button
+                //onClick={() => dispatch({ type: "reset" })}>Reiniciar partida
+                onClick={() => dispatch(reset())}
+            >
+                Reiniciar partida
+            </button>
         </div>
     );
 }

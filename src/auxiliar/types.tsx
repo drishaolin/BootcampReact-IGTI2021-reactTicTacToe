@@ -1,4 +1,5 @@
-import { Action, PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit";
+//import { Action } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { store } from "./store";
 
@@ -12,8 +13,8 @@ export interface ITicTacToeState {
     board: CellValue[][],
 }
 
-export type ActionPlay = PayloadAction<{i: number, j: number}, "play">;
-export type ActionReset = Action<"reset">;
+export type ActionPlay = PayloadAction<{i: number, j: number}>;
+//export type ActionReset = Action<"reset">;
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
